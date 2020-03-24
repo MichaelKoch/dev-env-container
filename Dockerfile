@@ -26,5 +26,4 @@ RUN chmod  777  /scripts -R \
     &&  apt-get autoremove  \
     && apt-get clean
 
-WORKDIR /workspace
 ENTRYPOINT /scripts/startup.sh
