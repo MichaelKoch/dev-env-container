@@ -1,0 +1,36 @@
+
+Port 22
+AddressFamily any
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+LoginGraceTime 2m
+PermitRootLogin yes
+#StrictModes yes
+MaxAuthTries 3
+MaxSessions 10
+
+# To disable tunneled clear text passwords, change to no here!
+#PasswordAuthentication yes
+#PermitEmptyPasswords no
+
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication no
+
+UsePAM yes
+
+GatewayPorts yes
+X11Forwarding yes
+PrintMotd no
+
+# no default banner path
+Banner /etc/ssh/banner
+
+# Allow client to pass locale environment variables
+AcceptEnv LANG LC_*
+
+# override default of no subsystems
+Subsystem       sftp    /usr/lib/openssh/sftp-server
+
+
