@@ -4,11 +4,12 @@ RUN apt-get update && apt-get install -y openssh-server   curl dirmngr apt-trans
     apt -y install nodejs && \
     wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb 
-  
+ 
 
-RUN   add-apt-repository universe && \
+RUN add-apt-repository universe && \
     apt-get update && \
     apt-get install -y dotnet-sdk-3.1
+
 ENV PASSWORD="CHANGE_ME" 
 RUN mkdir /var/run/sshd
 
@@ -21,7 +22,9 @@ COPY ./etc /etc
 RUN chmod  777  /scripts -R \ 
     && chmod 600 /etc/ssh/* \ 
     && chmod 600 /etc/ssh/*.* \
-    && mkdir /workspace
+    && mkdir /workspace \
+    &&  apt-get autoremove  \
+    && apt-get clean
+
 WORKDIR /workspace
 ENTRYPOINT /scripts/startup.sh
-CMD ["bin/bash"]
