@@ -2,12 +2,12 @@ FROM ubuntu:20.04 as build
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update && apt-get install -y dnsutils telnet iputils-ping openssh-server curl dirmngr apt-transport-https software-properties-common lsb-release ca-certificates default-jre-headless git  apt-transport-https
+RUN apt-get update && apt-get install -y iputils-ping openssh-server curl apt-transport-https software-properties-common lsb-release ca-certificates default-jre-headless git  apt-transport-https
 RUN curl -sL https://deb.nodesource.com/setup_14.x |  bash -  && \
     apt -y install nodejs 
 
 
-RUN  wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+RUN  wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && \
     add-apt-repository universe && \
     apt-get update && \
