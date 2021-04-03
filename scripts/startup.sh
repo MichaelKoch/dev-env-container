@@ -7,6 +7,6 @@ fi
 echo "SETTING ROOT PASSWORD"
 echo 'root:'${PASSWORD} | chpasswd
 echo STARTUP DEVELOPMENT CONATINER 
-/usr/sbin/sshd -D&
-(cd /workspace && /bin/bash )
+/usr/sbin/sshd &
+tail -f /dev/null
 

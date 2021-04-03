@@ -1,22 +1,22 @@
-FROM ubuntu:18.04 
-RUN apt-get update && apt-get install -y openssh-server   curl dirmngr apt-transport-https software-properties-common lsb-release ca-certificates default-jre-headless git  apt-transport-https\
-    && curl -sL https://deb.nodesource.com/setup_12.x |  bash -  && \
-    apt -y install nodejs && \
-    wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
-    dpkg -i packages-microsoft-prod.deb 
- 
+FROM ubuntu:20.04 as build
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN add-apt-repository universe && \
+RUN apt-get update && apt-get install -y openssh-server curl dirmngr apt-transport-https software-properties-common lsb-release ca-certificates default-jre-headless git  apt-transport-https
+RUN curl -sL https://deb.nodesource.com/setup_14.x |  bash -  && \
+    apt -y install nodejs 
+
+
+RUN  wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && \
+    add-apt-repository universe && \
     apt-get update && \
-    apt-get install -y dotnet-sdk-3.1
+    apt-get install -y dotnet-sdk-3.1 dotnet-sdk-5.0 && \
+    mkdir /var/run/sshd
 
-ENV PASSWORD="CHANGE_ME" 
-RUN mkdir /var/run/sshd
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
-
+FROM build
 EXPOSE 22
+ENV PASSWORD="CHANGE_ME" 
 COPY ./scripts /scripts
 COPY ./etc /etc
 RUN chmod  777  /scripts -R \ 
