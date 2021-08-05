@@ -1,4 +1,3 @@
-
 Port 22
 AddressFamily any
 ListenAddress 0.0.0.0
@@ -11,12 +10,14 @@ MaxAuthTries 3
 MaxSessions 10
 
 # To disable tunneled clear text passwords, change to no here!
-#PasswordAuthentication yes
-#PermitEmptyPasswords no
+PasswordAuthentication yes
+PermitEmptyPasswords no
 
-# Change to yes to enable challenge-response passwords (beware issues with
-# some PAM modules and threads)
-ChallengeResponseAuthentication no
+
+SyslogFacility AUTH
+LogLevel INFO
+LoginGraceTime 30
+PrintLastLog yes
 
 UsePAM yes
 
