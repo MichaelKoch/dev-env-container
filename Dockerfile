@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x |  bash -  && \
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  apt-key add - && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
     apt update && \
-    apt install docker-ce-cli
+    apt install -y docker-ce-cli
 
 RUN  wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
      dpkg -i packages-microsoft-prod.deb && \
