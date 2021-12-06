@@ -10,5 +10,6 @@ echo "SETTING ROOT PASSWORD"
 echo 'root:'${PASSWORD} | chpasswd
 echo ${USERNAME}':'${PASSWORD} | chpasswd
 echo STARTUP DEVELOPMENT CONTAINER 
-/usr/sbin/sshd &
+service ssh start 
+service rsyslog start
 tail -f /dev/null
