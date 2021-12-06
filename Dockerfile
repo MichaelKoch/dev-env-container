@@ -2,7 +2,7 @@ FROM ubuntu:20.04 as build
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update && apt-get install -y rsyslog iputils-ping  openssh-server curl apt-transport-https software-properties-common lsb-release ca-certificates default-jre-headless git  apt-transport-https
+RUN apt-get update && apt-get install -y rsyslog iputils-ping nginx openssh-server curl apt-transport-https software-properties-common lsb-release ca-certificates default-jre-headless git  apt-transport-https
 RUN curl -sL https://deb.nodesource.com/setup_16.x |  bash -  && \
     apt -y install nodejs 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  apt-key add - && \
