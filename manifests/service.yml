@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "akseu-662a"
+    labels:
+        app: "akseu-662a"
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 22
+      targetPort: 22
+      protocol: TCP
+      name: http
+    selector:
+        app: "akseu-662a"
