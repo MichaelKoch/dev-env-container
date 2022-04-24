@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 as build
+FROM ubuntu:20.04
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -19,13 +19,27 @@ RUN  wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microso
      apt-get clean && \
      mkdir /var/run/sshd
 
-FROM build
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
+    chmod 700 get_helm.sh && \
+    get_helm.sh
+
+
+RUN curl https://baltocdn.com/helm/signing.asc |  apt-key add - && \
+    apt-get install apt-transport-https --yes && \
+    echo "deb https://baltocdn.com/helm/stable/debian/ all main" |  tee /etc/apt/sources.list.d/helm-stable-debian.list && \
+    apt-get update && \
+    apt-get install helm
+
+
 EXPOSE 22 80 443
 ENV USERNAME="root" 
 ENV PASSWORD="CHANGE_ME" 
+
 COPY ./scripts /scripts
 COPY ./etc /etc
+
 RUN    chmod  777  /scripts -R \ 
     && chmod 600 /etc/ssh/* \ 
     && chmod 600 /etc/ssh/*.* 
+
 ENTRYPOINT /scripts/startup.sh
