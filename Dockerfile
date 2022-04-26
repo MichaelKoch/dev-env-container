@@ -4,7 +4,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 run apt-get update && \
     apt-get install -y curl apt-transport-https ca-certificates software-properties-common wget
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x |  bash -  
+# RUN curl -sL https://deb.nodesource.com/setup_16.x |  bash -  
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  apt-key add - && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" 
@@ -22,7 +22,8 @@ RUN  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg |  apt-key ad
 
 RUN apt-get update && apt-get install -y rsyslog iputils-ping nginx openssh-server \
     default-jre-headless git \
-    kubectl helm dotnet-sdk-3.1 dotnet-sdk-6.0 docker-ce-cli nodejs
+    kubectl helm dotnet-sdk-6.0 docker-ce-cli nodejs fail2ban
+    
 
 RUN  apt-get autoremove  && \
      apt-get clean && \
@@ -40,6 +41,7 @@ COPY ./etc /etc
 
 RUN    chmod  777  /scripts -R \ 
     && chmod 600 /etc/ssh/* \ 
-    && chmod 600 /etc/ssh/*.* 
+    && chmod 600 /etc/ssh/*.* \
+    && touch /var/log/auth.log
 
 ENTRYPOINT /scripts/startup.sh

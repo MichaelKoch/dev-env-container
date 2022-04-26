@@ -12,4 +12,5 @@ echo ${USERNAME}':'${PASSWORD} | chpasswd
 echo STARTUP DEVELOPMENT CONTAINER 
 service ssh start 
 service rsyslog start
+service fail2ban start
 tail -f /dev/null
