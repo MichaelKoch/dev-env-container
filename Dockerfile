@@ -22,7 +22,9 @@ RUN  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg |  apt-key ad
 
 RUN apt-get update && apt-get install -y rsyslog iputils-ping nginx openssh-server \
     default-jre-headless git \
-    kubectl helm dotnet-sdk-6.0 docker-ce-cli nodejs fail2ban
+    kubectl helm \
+    dotnet-sdk-6.0 azure-functions-core-tools-4 \
+    docker-ce-cli nodejs fail2ban
     
 
 RUN  apt-get autoremove  && \
