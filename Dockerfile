@@ -43,7 +43,6 @@ COPY ./etc /etc
 
 RUN    chmod  777  /scripts -R \ 
     && chmod 600 /etc/ssh/* \ 
-    && chmod 600 /etc/ssh/*.* \
-    && touch /var/log/auth.log
+    && chmod 600 /etc/ssh/*.* 
 
 ENTRYPOINT /scripts/startup.sh

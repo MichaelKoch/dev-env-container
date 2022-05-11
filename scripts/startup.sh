@@ -10,7 +10,10 @@ echo "SETTING ROOT PASSWORD"
 echo 'root:'${PASSWORD} | chpasswd
 echo ${USERNAME}':'${PASSWORD} | chpasswd
 echo STARTUP DEVELOPMENT CONTAINER 
+touch /var/log/auth.log
+chmod 777 /var/log/auth.log
 service ssh start 
 service rsyslog start
 service fail2ban start
+
 tail -f /dev/null
