@@ -19,12 +19,14 @@ RUN curl https://baltocdn.com/helm/signing.asc |  apt-key add - && \
 RUN  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg |  apt-key add - && \
      echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" |  tee -a /etc/apt/sources.list.d/kubernetes.list
 
-
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x |bash - 
+  
+    
 RUN apt-get update && apt-get install -y rsyslog iputils-ping nginx openssh-server \
     default-jre-headless git \
     kubectl helm \
     dotnet-sdk-6.0 azure-functions-core-tools-4 \
-    docker-ce-cli nodejs fail2ban
+    docker-ce-cli  nodejs npm fail2ban
     
 
 RUN  apt-get autoremove  && \
