@@ -1,6 +1,11 @@
 ***********************************************
+
 BASE        : ubuntu:20.04
-CAPABILITY  : nginx / NODE 16 / .Net core 3.1/5              
+CAPABILITY  : nginx 
+            : NODE 16 
+            : .net 6
+            : .net functions tools V4
+            
 ***********************************************
  DEVELOPMENT ENV FOR REMOTE SSH DEVELOPMENT   
 ***********************************************
