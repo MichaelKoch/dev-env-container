@@ -19,7 +19,7 @@ RUN curl https://baltocdn.com/helm/signing.asc |  apt-key add - && \
 RUN  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg |  apt-key add - && \
      echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" |  tee -a /etc/apt/sources.list.d/kubernetes.list
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x |bash - 
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x |bash - 
   
     
 RUN apt-get update && apt-get install -y rsyslog iputils-ping nginx openssh-server \
