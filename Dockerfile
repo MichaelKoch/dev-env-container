@@ -2,7 +2,7 @@ FROM ubuntu:20.04 as BUILD
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 run apt-get update && \
-    apt-get install -y curl apt-transport-https ca-certificates software-properties-common wget
+    apt-get install -y curl apt-transport-https ca-certificates software-properties-common wget node-gyp
 
 # RUN curl -sL https://deb.nodesource.com/setup_16.x |  bash -  
 
@@ -26,11 +26,12 @@ RUN apt-get update && apt-get install -y rsyslog iputils-ping nginx openssh-serv
     default-jre-headless git \
     kubectl helm \
     dotnet-sdk-6.0 azure-functions-core-tools-4 \
-    docker-ce-cli  nodejs npm fail2ban
-    
+    docker-ce-cli  fail2ban
 
-RUN  apt-get autoremove  && \
-     apt-get clean && \
+RUN apt-get install -y nodejs
+
+RUN  apt-get autoremove  -y && \
+     apt-get clean -y && \
      mkdir /var/run/sshd
 
 
