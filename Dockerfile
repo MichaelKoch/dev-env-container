@@ -9,9 +9,6 @@ run apt-get update && \
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  apt-key add - && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" 
 
-#RUN  wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
-#     dpkg -i packages-microsoft-prod.deb && \
-#     add-apt-repository universe
 
 RUN curl https://baltocdn.com/helm/signing.asc |  apt-key add - && \
     echo "deb https://baltocdn.com/helm/stable/debian/ all main" |  tee /etc/apt/sources.list.d/helm-stable-debian.list 
@@ -25,7 +22,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x |bash -
 RUN apt-get update && apt-get install -y rsyslog iputils-ping nginx openssh-server \
     default-jre-headless git \
     kubectl helm \
-    dotnet6 azure-functions-core-tools-4 \
+    dotnet6 \
     docker-ce-cli  fail2ban
 
 RUN apt-get install -y nodejs
@@ -34,6 +31,12 @@ RUN  apt-get autoremove  -y && \
      apt-get clean -y && \
      mkdir /var/run/sshd
 
+RUN  wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+     dpkg -i packages-microsoft-prod.deb && \
+     add-apt-repository universe
+     
+RUN apt-get update && apt-get install -y azure-functions-core-tools-4 
+   
 
 FROM BUILD
 
