@@ -1,11 +1,11 @@
 ***********************************************
 
-BASE        : ubuntu:20.04
+BASE        : ubuntu:22.04
 CAPABILITY  : nginx 
             : NODE 16 
             : .net 6
             : .net functions tools V4
-            
+            : Python3
 ***********************************************
  DEVELOPMENT ENV FOR REMOTE SSH DEVELOPMENT   
 ***********************************************
