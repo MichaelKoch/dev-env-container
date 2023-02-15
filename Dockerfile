@@ -2,7 +2,7 @@ FROM ubuntu:22.04 as BUILD
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 run apt-get update && \
-    apt-get install -y curl apt-transport-https ca-certificates software-properties-common wget 
+    apt-get install -y curl apt-transport-https ca-certificates software-properties-common wget python3
 
 # RUN curl -sL https://deb.nodesource.com/setup_16.x |  bash -  
 
