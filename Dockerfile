@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as BUILD
+FROM ubuntu:22.04 as build
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 run apt-get update && \
